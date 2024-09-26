@@ -78,7 +78,8 @@ CORS_ALLOWED_ORIGINS = [
 # CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
-CSRF_TRUSTED_ORIGINS =['http://127.0.0.1:8000/',]
+CSRF_TRUSTED_ORIGINS =['http://127.0.0.1:8000/',
+'https://offshift-j17p9ga19-abirs-projects-dc8c81b7.vercel.app',]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', 
