@@ -70,10 +70,11 @@ REST_FRAMEWORK = {
     
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5501',
-    'https://offshift-lqysq1rc0-abirs-projects-dc8c81b7.vercel.app/',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://127.0.0.1:5501',
+#     'https://offshift-lqysq1rc0-abirs-projects-dc8c81b7.vercel.app/',
+# ]
+
 # CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
