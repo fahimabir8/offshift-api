@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets,filters,status
 from rest_framework.response import Response
 from .serializers import CategorySerializer,WorkSerializer,ProposalSerializer
@@ -15,8 +16,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class WorkViewSet(viewsets.ModelViewSet):
     queryset = Work.objects.all()
     serializer_class = WorkSerializer
-    filter_backends = [filters.SearchFilter,filters.OrderingFilter]
-    search_fields = ['=id','title', 'description', 'category__name']
+    filter_backends = [filters.SearchFilter,filters.OrderingFilter,DjangoFilterBackend]
+    filterset_fields = ['id']
+    search_fields = ['title', 'description', 'category__name']
     ordering_fields = ['budget']
     ordering = ['budget']
     
