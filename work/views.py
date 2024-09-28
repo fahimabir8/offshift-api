@@ -24,7 +24,6 @@ class WorkViewSet(viewsets.ModelViewSet):
     
 
 class ProposalApiView(APIView):
-    permission_classes = [IsAuthenticated]
     serializer_class = ProposalSerializer
     
     def post(self, request, *args, **kwargs):
