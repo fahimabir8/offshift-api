@@ -23,15 +23,48 @@ class WorkViewSet(viewsets.ModelViewSet):
     ordering = ['budget']
     
 
+# class ProposalApiView(APIView):
+#     serializer_class = ProposalSerializer
+    
+#     def post(self, request, *args, **kwargs):
+#         job_id = request.query_params.get('jobId')  
+#         work = Work.objects.get(id=job_id)  
+   
+#         data = {
+#             'freelancer': request.user.id,  
+#             'work': work.id,
+#             'client': work.client.id,
+#             'price': request.data.get('price'),
+#             'content': request.data.get('content')
+#         }
+
+#         serializer = ProposalSerializer(data=data, context={'request': request})
+#         if serializer.is_valid():
+#             serializer.save() 
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from rest_framework.exceptions import NotFound
+
 class ProposalApiView(APIView):
     serializer_class = ProposalSerializer
-    
+
     def post(self, request, *args, **kwargs):
-        job_id = request.query_params.get('jobId')  
-        work = Work.objects.get(id=job_id)  
-   
+        print(request.data)  # Add this to log the request data
+        job_id = request.query_params.get('jobId')
+        print("job id here",job_id)
+        # Validate job_id
+        if not job_id:
+            return Response({"detail": "Job ID is required"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            work = Work.objects.get(id=job_id)
+        except Work.DoesNotExist:
+            raise NotFound(detail="Work with this Job ID does not exist.")
+        
         data = {
-            'freelancer': request.user.id,  
+            'freelancer': request.user.id,
             'work': work.id,
             'client': work.client.id,
             'price': request.data.get('price'),
@@ -40,7 +73,7 @@ class ProposalApiView(APIView):
 
         serializer = ProposalSerializer(data=data, context={'request': request})
         if serializer.is_valid():
-            serializer.save() 
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
