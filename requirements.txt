@@ -13,6 +13,7 @@ djangorestframework
 gunicorn
 python-decouple
 psycopg2-binary
+Pillow
 whitenoise
 sqlparse
 certifi
