@@ -28,9 +28,12 @@ class UserRegistrationApiView(APIView):
         
         if serializer.is_valid():
             user = serializer.save()
+            print(user)
             token = default_token_generator.make_token(user)
+            print("token ", token)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            confirm_link = f"http://127.0.0.1:8000/account/active/{uid}/{token}"
+            print("uid ", uid)
+            confirm_link = f"https://offshift-api.vercel.app/account/active/{uid}/{token}"
             email_subject = "Confirm Your Email"
             email_body = render_to_string('confirm_email.html', {'confirm_link' : confirm_link})
             
@@ -38,7 +41,6 @@ class UserRegistrationApiView(APIView):
             email.attach_alternative(email_body, "text/html")
             email.send()
             return Response("Check your mail for confirmation")
-        
         return Response(serializer.errors)
 
 
@@ -53,7 +55,6 @@ def activate(request, uid64, token):
         user.is_active = True
         user.save()
         return redirect('login')
-    
     else:
         return redirect('register')
     

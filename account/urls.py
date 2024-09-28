@@ -12,6 +12,6 @@ urlpatterns = [
     path('login/', views.UserLoginApiView.as_view(), name='login'),
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
     path('edit-profile/', views.EditProfileApiView.as_view(), name='edit-profile'), 
-    path('active/<uid64>/<token>/', views.activate, name = 'activate'),
+    path('active/<uid64>/<token>/', views.activate, name='activate'),
     path('post_review/',views.ReviewApiView.as_view(), name = 'review')
 ]
