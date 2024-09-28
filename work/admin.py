@@ -6,7 +6,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name','slug',]
     
 class CustomWork(admin.ModelAdmin):
-    list_display = ['title','client','freelancer',]
+    list_display = ['id','title','client','freelancer',]
 
 class CustomProposal(admin.ModelAdmin):
     list_display = ['work','client','freelancer',]

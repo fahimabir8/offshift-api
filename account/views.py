@@ -94,7 +94,7 @@ class UserViewset(viewsets.ModelViewSet):
     search_fields = ['id','first_name']
     
 class EditProfileApiView(APIView):
-    permission_classes = [IsAuthenticated]
+    
 
     def get(self, request):
         serializer = serializers.UserSerializer(request.user)
